@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tigers_journey_evolution/screens/loading/loading_screen.dart';
+import 'package:tigers_journey_evolution/screens/main_screen.dart';
 
 void main() {
   runZonedGuarded(
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(),
+      home: const MainScreen(),
     );
   }
 }
