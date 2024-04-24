@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tigers_journey_evolution/screens/loading/loading_screen.dart';
-import 'package:tigers_journey_evolution/screens/main_screen.dart';
+import 'package:tigers_journey_evolution/screens/screens.dart';
 
 void main() {
   runZonedGuarded(

@@ -14,7 +14,7 @@ class AppTextStyles {
       BoxShadow(
         offset: const Offset(2, 2),
         blurRadius: 3.r,
-        color: AppTheme.darkGreen.withOpacity(0.72),
+        color: AppTheme.darkGreen1.withOpacity(0.72),
       ),
     ],
   );
@@ -30,7 +30,7 @@ class AppTextStyles {
       BoxShadow(
         offset: const Offset(2, 2),
         blurRadius: 3.r,
-        color: AppTheme.darkGreen.withOpacity(0.72),
+        color: AppTheme.darkGreen1.withOpacity(0.72),
       ),
     ],
   );
@@ -45,7 +45,38 @@ class AppTextStyles {
       BoxShadow(
         offset: const Offset(2, 2),
         blurRadius: 3.r,
-        color: AppTheme.darkGreen.withOpacity(0.72),
+        color: AppTheme.darkGreen1.withOpacity(0.72),
+      ),
+    ],
+  );
+
+  static final TextStyle textStyle1 = TextStyle(
+    fontFamily: 'Dongle',
+    fontSize: 50.r,
+    fontWeight: FontWeight.w700,
+    height: 44 / 50,
+    color: AppTheme.white3,
+  );
+
+  static final TextStyle textStyle2 = TextStyle(
+    fontFamily: 'Dongle',
+    fontSize: 28.r,
+    fontWeight: FontWeight.w400,
+    height: 30 / 28,
+    color: AppTheme.white3,
+  );
+
+  static final TextStyle textStyle3 = TextStyle(
+    fontFamily: 'Dongle',
+    fontSize: 28.r,
+    fontWeight: FontWeight.w700,
+    height: 30 / 28,
+    color: AppTheme.white3,
+    shadows: [
+      BoxShadow(
+        offset: const Offset(2, 2),
+        blurRadius: 3.r,
+        color: AppTheme.darkGreen1.withOpacity(0.72),
       ),
     ],
   );

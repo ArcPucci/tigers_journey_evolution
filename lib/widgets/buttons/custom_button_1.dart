@@ -9,20 +9,30 @@ class CustomButton1 extends StatelessWidget {
     this.onTap,
     this.bg,
     this.opacity = 1,
+    this.height,
+    this.innerHeight,
+    this.textStyle,
+    this.width,
+    this.innerWidth,
   });
 
   final String text;
   final String? bg;
+  final double? width;
+  final double? innerWidth;
+  final double? height;
+  final double? innerHeight;
   final double opacity;
   final VoidCallback? onTap;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 327.w,
-        height: 76.h,
+        width: width ?? 327.w,
+        height: height ?? 76.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: AppTheme.lightBrown,
@@ -36,8 +46,8 @@ class CustomButton1 extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: Container(
-          width: 324.w,
-          height: 70.h,
+          width: innerWidth ?? 324.w,
+          height: innerHeight ?? 70.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
@@ -45,12 +55,13 @@ class CustomButton1 extends StatelessWidget {
               fit: BoxFit.fill,
             ),
           ),
+          clipBehavior: Clip.antiAlias,
           alignment: Alignment.center,
           child: Opacity(
             opacity: opacity,
             child: Text(
               text,
-              style: AppTextStyles.title1_2,
+              style: textStyle ?? AppTextStyles.title1_2,
             ),
           ),
         ),
