@@ -113,4 +113,18 @@ class AppTheme {
     spreadRadius: 2.r,
     color: AppTheme.dark5.withOpacity(0.25),
   );
+
+  static BoxShadow boxShadow6 = BoxShadow(
+    offset: const Offset(3, 5),
+    blurRadius: 5.r,
+    spreadRadius: 2.r,
+    color: Colors.black.withOpacity(0.25),
+  );
+
+  static BoxShadow boxShadow7 = BoxShadow(
+    offset: const Offset(3, 4),
+    blurRadius: 4.r,
+    spreadRadius: 2.r,
+    color: Colors.black.withOpacity(0.25),
+  );
 }

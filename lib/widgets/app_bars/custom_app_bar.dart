@@ -44,10 +44,11 @@ class CustomAppBar extends StatelessWidget {
       transition: PopoverTransition.other,
       backgroundColor: Colors.transparent,
       barrierColor: AppTheme.dark.withOpacity(0.8),
-      arrowHeight: 0,
-      arrowWidth: 0,
       contentDyOffset: 13.h,
       direction: PopoverDirection.top,
+      arrowHeight: 0,
+      width: 500.w,
+      arrowWidth: 600.w,
       height: height,
       bodyBuilder: (context) {
         return const SettingsPopover();
@@ -63,8 +64,9 @@ class CustomAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       barrierColor: AppTheme.dark.withOpacity(0.8),
       direction: PopoverDirection.top,
-      arrowWidth: 0,
       arrowHeight: 0,
+      width: 500.w,
+      arrowWidth: 600.w,
       contentDyOffset: 11.h,
       height: height,
       bodyBuilder: (context) {
@@ -82,11 +84,12 @@ class CustomAppBar extends StatelessWidget {
       barrierColor: AppTheme.dark.withOpacity(0.8),
       direction: PopoverDirection.top,
       arrowHeight: 0,
-      arrowWidth: 0,
+      width: 500.w,
+      arrowWidth: 600.w,
       contentDyOffset: 6.h,
       height: height,
       bodyBuilder: (context) {
-        return MailsPopover();
+        return const MailsPopover();
       },
     );
   }

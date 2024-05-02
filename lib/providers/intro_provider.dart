@@ -60,7 +60,7 @@ class IntroProvider extends ChangeNotifier {
   }
 
   void _reset() {
-    _index = 0;
+    _index = 5;
     notifyListeners();
   }
 

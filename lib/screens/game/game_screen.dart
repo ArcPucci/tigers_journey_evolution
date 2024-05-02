@@ -21,6 +21,7 @@ class GameScreen extends StatelessWidget {
           bg: value.bg,
           blurredColor: AppTheme.dark.withOpacity(0.4),
           hasCloseButton: !value.hasAppBar,
+          onClose: () => showSuccessDialog(context),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -122,6 +123,16 @@ class GameScreen extends StatelessWidget {
             ],
           ),
         );
+      },
+    );
+  }
+
+  void showSuccessDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      barrierColor: AppTheme.dark.withOpacity(0.8),
+      builder: (context) {
+        return const Center(child: FailDialog());
       },
     );
   }

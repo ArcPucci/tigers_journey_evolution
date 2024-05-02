@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tigers_journey_evolution/utils/utils.dart';
-import 'package:tigers_journey_evolution/widgets/buttons/custom_button_1.dart';
+import 'package:tigers_journey_evolution/widgets/widgets.dart';
 
-class ExitDialog extends StatelessWidget {
-  const ExitDialog({super.key});
+class FailDialog extends StatelessWidget {
+  const FailDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ExitDialog extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
           child: Container(
             width: 361.w,
-            height: 212.h,
+            height: 286.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
@@ -40,7 +40,7 @@ class ExitDialog extends StatelessWidget {
               children: [
                 Container(
                   width: 361.w,
-                  height: 89.h,
+                  height: 146.h,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -53,12 +53,15 @@ class ExitDialog extends StatelessWidget {
                       ),
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 27.w,
-                    vertical: 16.h,
+                  padding: EdgeInsets.only(
+                    left: 27.w,
+                    right: 27.w,
+                    top: 26.h,
+                    bottom: 16.h,
                   ),
+                  alignment: Alignment.center,
                   child: Text(
-                    'Are you sure you want to quit the game?',
+                    'You have run out of lives, wait until your lives are restored or buy premium to continue the game',
                     style: AppTextStyles.textStyle2.copyWith(
                       color: AppTheme.dark4,
                     ),
@@ -68,34 +71,36 @@ class ExitDialog extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: SizedBox(
-                      width: 329.w,
+                      width: 247.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButton1(
-                            text: 'YES',
-                            width: 158.w,
-                            height: 76.h,
-                            innerWidth: 146.w,
-                            bg: 'assets/png/buttons/small_button_2.png',
-                            textStyle: AppTextStyles.title1_2,
-                            opacity: 0.4,
-                            onTap: () => Navigator.of(context).pop(true),
+                          CustomIconButton2(
+                            width: 100.r,
+                            height: 100.r,
+                            icon: 'assets/png/icons/home.png',
+                            borderGradient: AppTheme.whiteBorderGradient,
+                            boxShadow: AppTheme.boxShadow6,
+                            bgColor: AppTheme.lightYellow,
+                            size: 66.r,
+                            padding: EdgeInsets.only(top: 3.r),
                           ),
-                          CustomButton1(
-                            text: 'NO',
-                            width: 158.w,
-                            height: 76.h,
-                            innerWidth: 146.w,
-                            bg: 'assets/png/buttons/small_button_1.png',
-                            textStyle: AppTextStyles.title1_2,
-                            onTap: () => Navigator.of(context).pop(false),
+                          CustomIconButton2(
+                            width: 100.r,
+                            height: 100.r,
+                            icon: 'assets/png/icons/menu.png',
+                            borderGradient: AppTheme.gradient2,
+                            bgGradient: AppTheme.gradient2,
+                            boxShadow: AppTheme.boxShadow6,
+                            size: 66.r,
+                            padding: EdgeInsets.only(left: 8.r),
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
+                SizedBox(height: 8.h),
               ],
             ),
           ),

@@ -67,8 +67,8 @@ class MainScreen extends StatelessWidget {
     Navigator.of(context, rootNavigator: true).push(route);
   }
 
-  void onExit(BuildContext context) async {
-    await showDialog(
+  Future<bool> onExit(BuildContext context) async {
+    return await showDialog(
       context: context,
       barrierColor: AppTheme.dark.withOpacity(0.9),
       builder: (context) {

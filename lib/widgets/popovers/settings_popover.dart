@@ -1,12 +1,16 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tigers_journey_evolution/widgets/bg/message_box.dart';
+import 'package:tigers_journey_evolution/widgets/widgets.dart';
 
 class SettingsPopover extends StatelessWidget {
-  const SettingsPopover({super.key});
+  const SettingsPopover({
+    super.key,
+    this.hasMessage = true,
+  });
+
+  final bool hasMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +65,14 @@ class SettingsPopover extends StatelessWidget {
                       height: 48.h,
                       fit: BoxFit.contain,
                     ),
-                    Image.asset(
-                      'assets/png/icons/exit.png',
-                      width: 36.w,
-                      height: 48.h,
-                      fit: BoxFit.contain,
+                    GestureDetector(
+                      onTap: () => showQuitDialog(context),
+                      child: Image.asset(
+                        'assets/png/icons/exit.png',
+                        width: 36.w,
+                        height: 48.h,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ],
                 ),
@@ -89,12 +96,24 @@ class SettingsPopover extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        const MessageBox(
-          hasNextButton: false,
-          text:
-              "Click on settings to turn sound and music on or off. You can find help information or exit the application",
+        Visibility(
+          visible: hasMessage,
+          child: const MessageBox(
+            hasNextButton: false,
+            text:
+                "Click on settings to turn sound and music on or off. You can find help information or exit the application",
+          ),
         ),
       ],
+    );
+  }
+
+  Future<bool> showQuitDialog(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(child: ExitDialog());
+      },
     );
   }
 }

@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tigers_journey_evolution/utils/utils.dart';
-import 'package:tigers_journey_evolution/widgets/buttons/custom_button_1.dart';
+import 'package:tigers_journey_evolution/widgets/widgets.dart';
 
-class ExitDialog extends StatelessWidget {
-  const ExitDialog({super.key});
+class SuccessDialog extends StatelessWidget {
+  const SuccessDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ExitDialog extends StatelessWidget {
           filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
           child: Container(
             width: 361.w,
-            height: 212.h,
+            height: 286.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
@@ -40,7 +40,7 @@ class ExitDialog extends StatelessWidget {
               children: [
                 Container(
                   width: 361.w,
-                  height: 89.h,
+                  height: 146.h,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -55,10 +55,11 @@ class ExitDialog extends StatelessWidget {
                   ),
                   padding: EdgeInsets.symmetric(
                     horizontal: 27.w,
-                    vertical: 16.h,
+                    vertical: 35.h,
                   ),
+                  alignment: Alignment.center,
                   child: Text(
-                    'Are you sure you want to quit the game?',
+                    'Great job! Your tigers have passed this era and can evolve further',
                     style: AppTextStyles.textStyle2.copyWith(
                       color: AppTheme.dark4,
                     ),
@@ -68,34 +69,45 @@ class ExitDialog extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: SizedBox(
-                      width: 329.w,
+                      width: 297.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomButton1(
-                            text: 'YES',
-                            width: 158.w,
-                            height: 76.h,
-                            innerWidth: 146.w,
-                            bg: 'assets/png/buttons/small_button_2.png',
-                            textStyle: AppTextStyles.title1_2,
-                            opacity: 0.4,
-                            onTap: () => Navigator.of(context).pop(true),
+                          CustomIconButton2(
+                            width: 76.r,
+                            height: 76.r,
+                            icon: 'assets/png/icons/restart_white.png',
+                            bgGradient: AppTheme.gradient2,
+                            borderGradient: AppTheme.gradient2,
+                            boxShadow: AppTheme.boxShadow7,
+                            size: 50.r,
+                            iconColor: Colors.white,
                           ),
-                          CustomButton1(
-                            text: 'NO',
-                            width: 158.w,
-                            height: 76.h,
-                            innerWidth: 146.w,
-                            bg: 'assets/png/buttons/small_button_1.png',
-                            textStyle: AppTextStyles.title1_2,
-                            onTap: () => Navigator.of(context).pop(false),
+                          CustomIconButton2(
+                            width: 100.r,
+                            height: 100.r,
+                            icon: 'assets/png/icons/play.png',
+                            borderGradient: AppTheme.whiteBorderGradient,
+                            boxShadow: AppTheme.boxShadow6,
+                            bgColor: AppTheme.lightYellow,
+                            size: 66.r,
+                            padding: EdgeInsets.only(left: 8.r),
+                          ),
+                          CustomIconButton2(
+                            width: 76.r,
+                            height: 76.r,
+                            icon: 'assets/png/icons/menu.png',
+                            bgGradient: AppTheme.gradient2,
+                            borderGradient: AppTheme.gradient2,
+                            boxShadow: AppTheme.boxShadow7,
+                            size: 50.r,
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
+                SizedBox(height: 8.h),
               ],
             ),
           ),

@@ -68,12 +68,16 @@ class CustomAppBar2 extends StatelessWidget {
       transition: PopoverTransition.other,
       backgroundColor: Colors.transparent,
       barrierColor: Colors.transparent,
+      width: 500.w,
+      arrowWidth: 600.w,
       arrowHeight: 0,
-      arrowWidth: 0,
+      arrowDxOffset: 0,
+      arrowDyOffset: 0,
+      direction: PopoverDirection.top,
       contentDyOffset: 13.h,
       height: height,
       bodyBuilder: (context) {
-        return const SettingsPopover();
+        return const SettingsPopover(hasMessage: false);
       },
     );
   }
@@ -85,12 +89,14 @@ class CustomAppBar2 extends StatelessWidget {
       transition: PopoverTransition.other,
       backgroundColor: Colors.transparent,
       barrierColor: Colors.transparent,
-      arrowWidth: 0,
+      width: 500.w,
+      arrowWidth: 600.w,
+      arrowDxOffset: 0,
+      arrowDyOffset: 0,
       arrowHeight: 0,
       contentDyOffset: 11.h,
       direction: PopoverDirection.top,
       height: height,
-      width: 393.w,
       bodyBuilder: (context) {
         return const PremiumPopover(hasMessage: false);
       },
@@ -106,7 +112,8 @@ class CustomAppBar2 extends StatelessWidget {
       barrierColor: Colors.transparent,
       direction: PopoverDirection.top,
       arrowHeight: 0,
-      arrowWidth: 0,
+      width: 500.w,
+      arrowWidth: 600.w,
       contentDyOffset: 6.h,
       height: height,
       bodyBuilder: (context) {

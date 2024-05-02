@@ -4,20 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tigers_journey_evolution/providers/providers.dart';
 import 'package:tigers_journey_evolution/screens/screens.dart';
+import 'package:tigers_journey_evolution/services/services.dart';
 
 void main() {
   runZonedGuarded(
-    () {
+    () async {
       WidgetsFlutterBinding.ensureInitialized();
+
+      final preferences = await SharedPreferences.getInstance();
+      final preferencesService = PreferencesService(preferences: preferences);
 
       runApp(
         ScreenUtilInit(
           designSize: const Size(393, 852),
           builder: (context, child) {
             final overlay = MediaQuery.of(context).padding;
-            return MyApp(overlay: overlay);
+            return MyApp(
+              overlay: overlay,
+              preferencesService: preferencesService,
+            );
           },
         ),
       );
@@ -50,9 +58,14 @@ CustomTransitionPage buildPageWithDefaultTransition({
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key, required this.overlay});
+  const MyApp({
+    super.key,
+    required this.overlay,
+    required this.preferencesService,
+  });
 
   final EdgeInsets overlay;
+  final PreferencesService preferencesService;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -132,6 +145,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider.value(value: widget.preferencesService),
         ChangeNotifierProvider(
           create: (context) => GameProvider(router: _router),
         ),

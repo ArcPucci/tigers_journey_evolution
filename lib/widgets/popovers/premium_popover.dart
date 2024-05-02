@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:tigers_journey_evolution/screens/screens.dart';
 import 'package:tigers_journey_evolution/utils/utils.dart';
 import 'package:tigers_journey_evolution/widgets/widgets.dart';
 
@@ -74,83 +75,89 @@ class PremiumPopover extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 8.h),
-                          Container(
-                            width: 335.w,
-                            height: 60.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              gradient: AppTheme.bgGradient,
-                              border: GradientBoxBorder(
+                          GestureDetector(
+                            onTap: () => onTapPremium(context),
+                            child: Container(
+                              width: 335.w,
+                              height: 60.h,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
                                 gradient: AppTheme.bgGradient,
-                                width: 0.1.sp,
+                                border: GradientBoxBorder(
+                                  gradient: AppTheme.bgGradient,
+                                  width: 0.1.sp,
+                                ),
+                                boxShadow: [AppTheme.boxShadow1],
                               ),
-                              boxShadow: [AppTheme.boxShadow1],
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 12.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 148.w,
-                                  height: 44.h,
-                                  child: Stack(
-                                    alignment: Alignment.centerRight,
-                                    children: [
-                                      Container(
-                                        width: 124.w,
-                                        height: 28.h,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(40),
-                                          gradient: AppTheme.bgGradient,
-                                          border: GradientBoxBorder(
+                              padding: EdgeInsets.symmetric(horizontal: 12.w),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: 148.w,
+                                    height: 44.h,
+                                    child: Stack(
+                                      alignment: Alignment.centerRight,
+                                      children: [
+                                        Container(
+                                          width: 124.w,
+                                          height: 28.h,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
                                             gradient: AppTheme.bgGradient,
-                                            width: 0.1.sp,
+                                            border: GradientBoxBorder(
+                                              gradient: AppTheme.bgGradient,
+                                              width: 0.1.sp,
+                                            ),
+                                            boxShadow: [AppTheme.boxShadow1],
                                           ),
-                                          boxShadow: [AppTheme.boxShadow1],
-                                        ),
-                                        padding: EdgeInsets.only(
-                                          right: 10.w,
-                                          top: 3.h,
-                                        ),
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          'infinite lives',
-                                          style:
-                                              AppTextStyles.title2_1.copyWith(
-                                            shadows: [],
+                                          padding: EdgeInsets.only(
+                                            right: 10.w,
+                                            top: 3.h,
+                                          ),
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            'infinite lives',
+                                            style:
+                                                AppTextStyles.title2_1.copyWith(
+                                              shadows: [],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Positioned(
-                                        left: 0,
-                                        top: 0,
-                                        bottom: 0,
-                                        child: Center(
-                                          child: Container(
-                                            width: 47.w,
-                                            height: 44.h,
-                                            decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/png/heart.png'),
-                                                fit: BoxFit.contain,
+                                        Positioned(
+                                          left: 0,
+                                          top: 0,
+                                          bottom: 0,
+                                          child: Center(
+                                            child: Container(
+                                              width: 47.w,
+                                              height: 44.h,
+                                              decoration: const BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/png/heart.png'),
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                              alignment: Alignment.topCenter,
+                                              padding: EdgeInsets.only(top: 5.h),
+                                              child: Text(
+                                                '∞',
+                                                style: AppTextStyles.textStyle5,
                                               ),
                                             ),
-                                            alignment: Alignment.topCenter,
-                                            padding: EdgeInsets.only(top: 5.h),
-                                            child: Text(
-                                              '∞',
-                                              style: AppTextStyles.textStyle5,
-                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                const CustomButton2(text: '\$0,99'),
-                              ],
+                                  CustomButton2(
+                                    text: '\$0,99',
+                                    onTap: () => onTapPremium(context),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(height: 12.h),
@@ -164,6 +171,7 @@ class PremiumPopover extends StatelessWidget {
                             innerHeight2: 47.h,
                             opacity: 0.4,
                             bg: 'assets/png/buttons/green_button_4.png',
+                            onTap: () => onTapPremium(context),
                           ),
                         ],
                       ),
@@ -200,5 +208,13 @@ class PremiumPopover extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void onTapPremium(BuildContext context) {
+    final route = MaterialPageRoute(
+      builder: (context) => const PremiumScreen(),
+    );
+
+    Navigator.of(context, rootNavigator: true).push(route);
   }
 }
