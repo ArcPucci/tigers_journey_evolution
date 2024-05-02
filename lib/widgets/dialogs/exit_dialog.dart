@@ -39,7 +39,7 @@ class ExitDialog extends StatelessWidget {
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(20),
                 ),
-                color: AppTheme.white3,
+                color: AppTheme.lightYellow,
                 border: Border(
                   bottom: BorderSide(
                     width: 2.sp,
@@ -53,9 +53,8 @@ class ExitDialog extends StatelessWidget {
               ),
               child: Text(
                 'Are you sure you want to quit the game?',
-                style: AppTextStyles.textStyle3.copyWith(
+                style: AppTextStyles.textStyle2.copyWith(
                   color: AppTheme.dark4,
-                  shadows: [],
                 ),
                 textAlign: TextAlign.center,
               ),

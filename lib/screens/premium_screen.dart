@@ -44,11 +44,14 @@ class PremiumScreen extends StatelessWidget {
                   children: [
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Image.asset(
-                        'assets/png/icons/close.png',
-                        width: 28.r,
-                        height: 28.r,
-                        fit: BoxFit.cover,
+                      child: GestureDetector(
+                        onTap: Navigator.of(context).pop,
+                        child: Image.asset(
+                          'assets/png/icons/close.png',
+                          width: 28.r,
+                          height: 28.r,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Image.asset(

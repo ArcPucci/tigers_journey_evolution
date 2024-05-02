@@ -38,6 +38,9 @@ dependencies:
   provider: ^6.1.2
   go_router: ^13.2.4
   flutter_screenutil: ^5.9.0
+  gradient_borders: ^1.0.0
+  popover: ^0.3.0
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +71,10 @@ flutter:
     - assets/png/
     - assets/png/icons/
     - assets/png/buttons/
+    - assets/png/maps/
+    - assets/png/loadings/
     - assets/png/bg/
+    - assets/png/pictures/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -108,5 +114,13 @@ flutter:
           weight: 400
         - asset: assets/fonts/Dongle-Light.ttf
           weight: 300
+    - family: HanaleiFill
+      fonts:
+        - asset: assets/fonts/HanaleiFill-Regular.ttf
+          weight: 400
+    - family: Flavors
+      fonts:
+        - asset: assets/fonts/Flavors-Regular.ttf
+          weight: 400
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
