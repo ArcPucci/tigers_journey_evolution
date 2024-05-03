@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _router = GoRouter(
+      initialLocation: '/',
       routes: [
         GoRoute(
           path: '/',
@@ -90,6 +91,16 @@ class _MyAppState extends State<MyApp> {
           },
           routes: [
             GoRoute(
+              path: 'loading',
+              pageBuilder: (context, state) {
+                return buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: LoadingScreen(),
+                );
+              },
+            ),
+            GoRoute(
               path: 'onboarding',
               pageBuilder: (context, state) {
                 return buildPageWithDefaultTransition(
@@ -98,40 +109,56 @@ class _MyAppState extends State<MyApp> {
                   child: const OnboardingScreen(),
                 );
               },
+            ),
+            GoRoute(
+              path: 'map',
+              pageBuilder: (context, state) {
+                return buildPageWithDefaultTransition(
+                  context: context,
+                  state: state,
+                  child: const MapScreen(),
+                );
+              },
               routes: [
                 GoRoute(
-                  path: 'map',
+                  path: 'game_loading',
                   pageBuilder: (context, state) {
                     return buildPageWithDefaultTransition(
                       context: context,
                       state: state,
-                      child: const MapScreen(),
+                      child: const GameLoadingScreen(),
                     );
                   },
-                  routes: [
-                    GoRoute(
-                      path: 'game_loading',
-                      pageBuilder: (context, state) {
-                        return buildPageWithDefaultTransition(
-                          context: context,
-                          state: state,
-                          child: const GameLoadingScreen(),
-                        );
-                      },
-                      routes: [
-                        GoRoute(
-                          path: 'game',
-                          pageBuilder: (context, state) {
-                            return buildPageWithDefaultTransition(
-                              context: context,
-                              state: state,
-                              child: GameScreen(overlay: widget.overlay),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                ),
+                GoRoute(
+                  path: 'game',
+                  pageBuilder: (context, state) {
+                    return buildPageWithDefaultTransition(
+                      context: context,
+                      state: state,
+                      child: GameScreen(overlay: widget.overlay),
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: 'fact_loading',
+                  pageBuilder: (context, state) {
+                    return buildPageWithDefaultTransition(
+                      context: context,
+                      state: state,
+                      child: const FactLoadingScreen(),
+                    );
+                  },
+                ),
+                GoRoute(
+                  path: 'fact',
+                  pageBuilder: (context, state) {
+                    return buildPageWithDefaultTransition(
+                      context: context,
+                      state: state,
+                      child: FactScreen(overlay: widget.overlay),
+                    );
+                  },
                 ),
               ],
             ),
@@ -147,12 +174,30 @@ class _MyAppState extends State<MyApp> {
       providers: [
         Provider.value(value: widget.preferencesService),
         ChangeNotifierProvider(
-          create: (context) => GameProvider(router: _router),
+          create: (context) => FactsProvider(router: _router),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PropertiesProvider(
+            preferencesService: widget.preferencesService,
+          )..init(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HealthProvider(
+            preferencesService: widget.preferencesService,
+          )..init(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GameProvider(
+            router: _router,
+            preferencesService: widget.preferencesService,
+            healthProvider: Provider.of(context, listen: false),
+          )..onInit(),
         ),
         ChangeNotifierProvider(
           create: (context) => IntroProvider(
             router: _router,
             gameProvider: Provider.of(context, listen: false),
+            preferencesService: widget.preferencesService,
           ),
         ),
       ],

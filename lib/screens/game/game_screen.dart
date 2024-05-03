@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:provider/provider.dart';
+import 'package:tigers_journey_evolution/models/models.dart';
 import 'package:tigers_journey_evolution/providers/providers.dart';
 import 'package:tigers_journey_evolution/utils/utils.dart';
 import 'package:tigers_journey_evolution/widgets/widgets.dart';
@@ -106,7 +107,10 @@ class GameScreen extends StatelessWidget {
                                       child: QuizButton(
                                         answer: answer,
                                         selected: selected,
-                                        onTap: () => value.onAnswer(index),
+                                        onTap: () async {
+                                          await value.onAnswer(index);
+                                          onShowFinalDialog(context, value);
+                                        },
                                       ),
                                     );
                                   },
@@ -127,10 +131,66 @@ class GameScreen extends StatelessWidget {
     );
   }
 
-  void showSuccessDialog(BuildContext context) async {
-    await showDialog(
+  void onShowFinalDialog(BuildContext context, GameProvider provider) async {
+    final answer = provider.answer;
+    if (answer.correct == Correctness.correct) {
+      final res = await showSuccessDialog(context);
+      if (res == 0) {
+        provider.onRestart();
+        return;
+      }
+      if (res == 1) {
+        provider.onNextLevel();
+        return;
+      }
+      if (res == 2) {
+        provider.onMenu();
+        return;
+      }
+    } else if (answer.correct == Correctness.neutral ||
+        (answer.correct == Correctness.wrong && provider.health > 0)) {
+      final res = await showWarningDialog(context, provider.health);
+      if (res) {
+        provider.onRestart();
+      } else {
+        provider.onMenu();
+      }
+    } else {
+      final res = await showFailDialog(context);
+      provider.onMenu();
+    }
+  }
+
+  Future<int> showSuccessDialog(BuildContext context) async {
+    return await showDialog(
       context: context,
       barrierColor: AppTheme.dark.withOpacity(0.8),
+      barrierDismissible: false,
+      builder: (context) {
+        return const Center(child: SuccessDialog());
+      },
+    );
+  }
+
+  Future<bool> showWarningDialog(BuildContext context, int health) async {
+    final str = health == 0
+        ? "You have run out of lives, wait until your lives are restored or buy premium to continue the game"
+        : "To pass the level you must make the right choice";
+    return await showDialog(
+      context: context,
+      barrierColor: AppTheme.dark.withOpacity(0.8),
+      barrierDismissible: false,
+      builder: (context) {
+        return Center(child: WarningDialog(message: str));
+      },
+    );
+  }
+
+  Future<bool> showFailDialog(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      barrierColor: AppTheme.dark.withOpacity(0.8),
+      barrierDismissible: false,
       builder: (context) {
         return const Center(child: FailDialog());
       },

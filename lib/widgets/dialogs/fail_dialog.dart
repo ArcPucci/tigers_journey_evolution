@@ -84,6 +84,7 @@ class FailDialog extends StatelessWidget {
                             bgColor: AppTheme.lightYellow,
                             size: 66.r,
                             padding: EdgeInsets.only(top: 3.r),
+                            onTap: () => Navigator.of(context).pop(true),
                           ),
                           CustomIconButton2(
                             width: 100.r,
@@ -94,6 +95,7 @@ class FailDialog extends StatelessWidget {
                             boxShadow: AppTheme.boxShadow6,
                             size: 66.r,
                             padding: EdgeInsets.only(left: 8.r),
+                            onTap: () => Navigator.of(context).pop(false),
                           ),
                         ],
                       ),

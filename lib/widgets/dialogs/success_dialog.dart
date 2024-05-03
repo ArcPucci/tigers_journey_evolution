@@ -82,6 +82,7 @@ class SuccessDialog extends StatelessWidget {
                             boxShadow: AppTheme.boxShadow7,
                             size: 50.r,
                             iconColor: Colors.white,
+                            onTap: () => Navigator.of(context).pop(0),
                           ),
                           CustomIconButton2(
                             width: 100.r,
@@ -92,6 +93,7 @@ class SuccessDialog extends StatelessWidget {
                             bgColor: AppTheme.lightYellow,
                             size: 66.r,
                             padding: EdgeInsets.only(left: 8.r),
+                            onTap: () => Navigator.of(context).pop(1),
                           ),
                           CustomIconButton2(
                             width: 76.r,
@@ -101,6 +103,7 @@ class SuccessDialog extends StatelessWidget {
                             borderGradient: AppTheme.gradient2,
                             boxShadow: AppTheme.boxShadow7,
                             size: 50.r,
+                            onTap: () => Navigator.of(context).pop(2),
                           ),
                         ],
                       ),

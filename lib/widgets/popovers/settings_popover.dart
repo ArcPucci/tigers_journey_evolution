@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:tigers_journey_evolution/providers/providers.dart';
 import 'package:tigers_journey_evolution/widgets/widgets.dart';
 
 class SettingsPopover extends StatelessWidget {
@@ -34,48 +36,56 @@ class SettingsPopover extends StatelessWidget {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              Container(
-                width: 341.w,
-                height: 81.h,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/png/box1.png'),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 46.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/png/icons/sound_on.png',
-                      width: 46.w,
-                      height: 48.h,
-                      fit: BoxFit.contain,
-                    ),
-                    Image.asset(
-                      'assets/png/icons/music_on.png',
-                      width: 48.w,
-                      height: 48.h,
-                      fit: BoxFit.contain,
-                    ),
-                    Image.asset(
-                      'assets/png/icons/question.png',
-                      width: 28.w,
-                      height: 48.h,
-                      fit: BoxFit.contain,
-                    ),
-                    GestureDetector(
-                      onTap: () => showQuitDialog(context),
-                      child: Image.asset(
-                        'assets/png/icons/exit.png',
-                        width: 36.w,
-                        height: 48.h,
+              Consumer<PropertiesProvider>(
+                builder: (BuildContext context, value, Widget? child) {
+                  return Container(
+                    width: 341.w,
+                    height: 81.h,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/png/box1.png'),
                         fit: BoxFit.contain,
                       ),
                     ),
-                  ],
-                ),
+                    padding: EdgeInsets.symmetric(horizontal: 46.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset(
+                          value.soundOn
+                              ? 'assets/png/icons/sound_on.png'
+                              : 'assets/png/icons/sound_off.png',
+                          width: 46.w,
+                          height: 48.h,
+                          fit: BoxFit.contain,
+                        ),
+                        Image.asset(
+                          value.muted
+                              ? 'assets/png/icons/music_off.png'
+                              : 'assets/png/icons/music_on.png',
+                          width: 48.w,
+                          height: 48.h,
+                          fit: BoxFit.contain,
+                        ),
+                        Image.asset(
+                          'assets/png/icons/question.png',
+                          width: 28.w,
+                          height: 48.h,
+                          fit: BoxFit.contain,
+                        ),
+                        GestureDetector(
+                          onTap: () => showQuitDialog(context),
+                          child: Image.asset(
+                            'assets/png/icons/exit.png',
+                            width: 36.w,
+                            height: 48.h,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
               Positioned(
                 top: 0,

@@ -58,8 +58,9 @@ class CustomButton2 extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               image: DecorationImage(
-                image:
-                    AssetImage(bg ?? 'assets/png/buttons/green_button_3.png'),
+                image: AssetImage(
+                  bg ?? 'assets/png/buttons/green_button_3.png',
+                ),
                 fit: BoxFit.cover,
               ),
               boxShadow: [

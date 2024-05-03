@@ -43,6 +43,7 @@ class QuizButton extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           answer.answer,
+          textAlign: TextAlign.center,
           style: AppTextStyles.title2_1.copyWith(
             shadows: [],
             color: AppTheme.dark4,

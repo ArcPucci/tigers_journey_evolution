@@ -154,7 +154,10 @@ class PremiumPopover extends StatelessWidget {
                                   ),
                                   CustomButton2(
                                     text: '\$0,99',
-                                    onTap: () => onTapPremium(context),
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                      onTapPremium(context);
+                                    },
                                   ),
                                 ],
                               ),

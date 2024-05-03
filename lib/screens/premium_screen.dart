@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:tigers_journey_evolution/providers/providers.dart';
 import 'package:tigers_journey_evolution/utils/utils.dart';
 import 'package:tigers_journey_evolution/widgets/buttons/custom_button_1.dart';
 
@@ -84,6 +87,7 @@ class PremiumScreen extends StatelessWidget {
                 height: 63.h,
                 innerHeight: 59.h,
                 textStyle: AppTextStyles.textStyle3,
+                onTap: () => onBuyPremium(context),
               ),
               SizedBox(height: 12.h),
               Row(
@@ -94,9 +98,12 @@ class PremiumScreen extends StatelessWidget {
                     style: AppTextStyles.title2_1,
                   ),
                   SizedBox(width: 16.w),
-                  Text(
-                    'Restore',
-                    style: AppTextStyles.title2_1,
+                  GestureDetector(
+                    onTap: () => onBuyPremium(context),
+                    child: Text(
+                      'Restore',
+                      style: AppTextStyles.title2_1,
+                    ),
                   ),
                   SizedBox(width: 16.w),
                   Text(
@@ -111,5 +118,15 @@ class PremiumScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onBuyPremium(BuildContext context) {
+    final provider = Provider.of<HealthProvider>(
+      context,
+      listen: false,
+    );
+
+    provider.onBuyPremium();
+    context.pop();
   }
 }

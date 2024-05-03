@@ -9,6 +9,38 @@ class PreferencesService {
 
   static const premiumKey = "PREMIUM";
   static const welcomeKey = "WELCOME";
+  static const levelKey = "LEVEL";
+  static const healthKey = "HEALTH";
+  static const reminderKey = "REMINDER";
+  static const mutedKey = "MUTED";
+  static const soundKey = "SOUND";
+  static const awardKey = "AWARD";
+  static const awardShowed = "AWARD_SHOW";
+  static const firstInitKey = "FIRST_INIT";
+
+  Future<void> setFirstInit() async {
+    await _preferences.setBool(firstInitKey, false);
+  }
+
+  bool getFirstInit() {
+    return _preferences.getBool(firstInitKey) ?? true;
+  }
+
+  Future<void> setAwardShow() async {
+    await _preferences.setBool(awardShowed, true);
+  }
+
+  bool getAwardShow() {
+    return _preferences.getBool(awardShowed) ?? false;
+  }
+
+  Future<void> setAward() async {
+    await _preferences.setBool(awardKey, true);
+  }
+
+  bool getAward() {
+    return _preferences.getBool(awardKey) ?? false;
+  }
 
   Future<void> setWelcome() async {
     await _preferences.setBool(welcomeKey, true);
@@ -24,5 +56,50 @@ class PreferencesService {
 
   bool getPremium() {
     return _preferences.getBool(premiumKey) ?? false;
+  }
+
+  Future<void> setLevel(int index) async {
+    await _preferences.setInt(levelKey, index);
+  }
+
+  int getLevel() {
+    return _preferences.getInt(levelKey) ?? 0;
+  }
+
+  Future<void> setHealth(int health) async {
+    await _preferences.setInt(healthKey, health);
+  }
+
+  int getHealth() {
+    return _preferences.getInt(healthKey) ?? 3;
+  }
+
+  Future<void> setReminder(DateTime? dateTime) async {
+    final date = dateTime?.microsecondsSinceEpoch;
+    await _preferences.setInt(reminderKey, date ?? 0);
+  }
+
+  DateTime? getReminder() {
+    final map = _preferences.getInt(reminderKey) ?? 0;
+    if (map == 0) return null;
+
+    final date = DateTime.fromMicrosecondsSinceEpoch(map);
+    return date;
+  }
+
+  Future<void> updateSound(bool soundOn) async {
+    await _preferences.setBool(soundKey, soundOn);
+  }
+
+  bool getSound() {
+    return _preferences.getBool(soundKey) ?? true;
+  }
+
+  Future<void> updateMuted(bool muted) async {
+    await _preferences.setBool(soundKey, muted);
+  }
+
+  bool getMuted() {
+    return _preferences.getBool(soundKey) ?? false;
   }
 }

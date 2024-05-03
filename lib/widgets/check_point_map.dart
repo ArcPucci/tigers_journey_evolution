@@ -5,9 +5,14 @@ import 'package:tigers_journey_evolution/utils/utils.dart';
 import 'package:tigers_journey_evolution/widgets/widgets.dart';
 
 class CheckPointMap extends StatelessWidget {
-  const CheckPointMap({super.key, required this.onStart});
+  const CheckPointMap({
+    super.key,
+    required this.onStart,
+    required this.reachedLevel,
+  });
 
   final void Function(Level level) onStart;
+  final int reachedLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +32,8 @@ class CheckPointMap extends StatelessWidget {
                 (index) {
                   final level = levels[index];
                   final checkPoint = level.checkPoint;
-                  final selected = index == 0;
-                  final passed = index >= 5;
+                  final selected = level.id == reachedLevel;
+                  final passed = level.id < reachedLevel;
                   return Positioned(
                     left: checkPoint.left,
                     top: checkPoint.top,

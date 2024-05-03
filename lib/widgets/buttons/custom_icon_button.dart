@@ -14,6 +14,7 @@ class CustomIconButton extends StatelessWidget {
     this.height,
     this.onTap,
     this.hasWarning = false,
+    this.topPadding,
   });
 
   final String icon;
@@ -21,6 +22,7 @@ class CustomIconButton extends StatelessWidget {
   final double? height;
   final VoidCallback? onTap;
   final bool hasWarning;
+  final double? topPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +51,7 @@ class CustomIconButton extends StatelessWidget {
                     ),
                   ),
                   alignment: Alignment.center,
+                  padding: EdgeInsets.only(top: topPadding ?? 0),
                   child: Image.asset(
                     icon,
                     width: width,

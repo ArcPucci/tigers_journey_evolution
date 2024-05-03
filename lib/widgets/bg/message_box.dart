@@ -8,16 +8,20 @@ class MessageBox extends StatelessWidget {
     this.onNext,
     required this.text,
     this.hasNextButton = true,
+    this.hasNextButton2 = false,
     this.hasInfoIcon = true,
     this.textStyle,
     this.verticalPadding,
+    this.onNext2,
   });
 
   final VoidCallback? onNext;
+  final VoidCallback? onNext2;
   final String text;
   final TextStyle? textStyle;
   final bool hasNextButton;
   final bool hasInfoIcon;
+  final bool hasNextButton2;
   final double? verticalPadding;
 
   @override
@@ -49,6 +53,21 @@ class MessageBox extends StatelessWidget {
                   height: 9.h,
                   fit: BoxFit.contain,
                 ),
+              ),
+            ),
+          ),
+        ),
+        Visibility(
+          visible: hasNextButton2,
+          child: Padding(
+            padding: EdgeInsets.only(right: 18.w),
+            child: GestureDetector(
+              onTap: onNext2,
+              child: Image.asset(
+                'assets/png/icons/next.png',
+                width: 40.w,
+                height: 34.h,
+                fit: BoxFit.contain,
               ),
             ),
           ),

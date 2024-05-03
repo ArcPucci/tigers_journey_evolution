@@ -7,3 +7,8 @@ final List<String> introTexts = [
   "Click on the level to start the game",
   "The adventure begins!",
 ];
+
+final List<String> awardTexts = [
+  "Click on the “Go” button next to any fact that interests you to go to view",
+  "Click on the “Award” button to start learning the facts",
+];
