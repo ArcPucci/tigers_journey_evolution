@@ -36,7 +36,6 @@ class CheckPointStar extends StatelessWidget {
                 'assets/png/star.png',
                 width: width + 3.w,
                 height: height + 4.h,
-                alignment: Alignment.topLeft,
                 fit: BoxFit.contain,
               ),
               Visibility(

@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tigers_journey_evolution/providers/providers.dart';
@@ -44,28 +47,34 @@ class SettingsPopover extends StatelessWidget {
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/png/box1.png'),
-                        fit: BoxFit.contain,
+                        fit: BoxFit.fill,
                       ),
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 46.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          value.soundOn
-                              ? 'assets/png/icons/sound_on.png'
-                              : 'assets/png/icons/sound_off.png',
-                          width: 46.w,
-                          height: 48.h,
-                          fit: BoxFit.contain,
+                        GestureDetector(
+                          onTap: () => value.onChangeSound(),
+                          child: Image.asset(
+                            value.soundOn
+                                ? 'assets/png/icons/sound_on.png'
+                                : 'assets/png/icons/sound_off.png',
+                            width: 46.w,
+                            height: 48.h,
+                            fit: BoxFit.contain,
+                          ),
                         ),
-                        Image.asset(
-                          value.muted
-                              ? 'assets/png/icons/music_off.png'
-                              : 'assets/png/icons/music_on.png',
-                          width: 48.w,
-                          height: 48.h,
-                          fit: BoxFit.contain,
+                        GestureDetector(
+                          onTap: () => value.onMute(),
+                          child: Image.asset(
+                            value.muted
+                                ? 'assets/png/icons/music_off.png'
+                                : 'assets/png/icons/music_on.png',
+                            width: 48.w,
+                            height: 48.h,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                         Image.asset(
                           'assets/png/icons/question.png',
@@ -74,7 +83,9 @@ class SettingsPopover extends StatelessWidget {
                           fit: BoxFit.contain,
                         ),
                         GestureDetector(
-                          onTap: () => showQuitDialog(context),
+                          onTap: () async {
+                            if(await showQuitDialog(context)) exit(0);
+                          },
                           child: Image.asset(
                             'assets/png/icons/exit.png',
                             width: 36.w,
