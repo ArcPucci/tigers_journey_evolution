@@ -31,7 +31,7 @@ class HealthProvider extends ChangeNotifier {
   Timer? _timer;
 
   static const _duration = 60 * _minutes;
-  static const _minutes = 30;
+  static const _minutes = 1;
 
   void init() async {
     _premium = _preferencesService.getPremium();
@@ -41,12 +41,14 @@ class HealthProvider extends ChangeNotifier {
   }
 
   void _updateHealth() async {
-    if (_health == 3) return;
+    if(_health == 3) return;
 
     final temp = _preferencesService.getReminder();
     if (temp == null) return;
 
     _reminder = temp.difference(DateTime.now()).inSeconds;
+
+    if(_reminder > _duration) _reminder = _duration;
 
     if (_reminder <= 0) {
       _health++;
@@ -69,7 +71,6 @@ class HealthProvider extends ChangeNotifier {
       await _preferencesService.setHealth(_health);
     }
 
-    if (_health == 3) return;
     _onSetTimer();
   }
 
@@ -87,6 +88,8 @@ class HealthProvider extends ChangeNotifier {
   }
 
   void _onSetTimer() {
+    if (_health == 3 || (_timer?.isActive ?? false)) return;
+
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if (_reminder <= 0) {
         _health++;
