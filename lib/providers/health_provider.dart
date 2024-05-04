@@ -31,7 +31,7 @@ class HealthProvider extends ChangeNotifier {
   Timer? _timer;
 
   static const _duration = 60 * _minutes;
-  static const _minutes = 1;
+  static const _minutes = 30;
 
   void init() async {
     _premium = _preferencesService.getPremium();

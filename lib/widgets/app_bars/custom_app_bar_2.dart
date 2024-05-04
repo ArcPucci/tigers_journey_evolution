@@ -23,8 +23,8 @@ class CustomAppBar2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GameProvider>(
-      builder: (BuildContext context, value, Widget? child) {
+    return Consumer2<GameProvider, PropertiesProvider>(
+      builder: (BuildContext context, value, value2, Widget? child) {
         return SizedBox(
           width: 361.w,
           height: 46.h,
@@ -37,7 +37,7 @@ class CustomAppBar2 extends StatelessWidget {
                   icon: 'assets/png/icons/mail.png',
                   width: 25.w,
                   height: 18.h,
-                  hasWarning: true,
+                  hasWarning: value2.hasNotification,
                   onTap: () => onShowMails(context),
                 ),
               ),

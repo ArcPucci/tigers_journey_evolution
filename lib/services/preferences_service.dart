@@ -17,6 +17,9 @@ class PreferencesService {
   static const awardKey = "AWARD";
   static const awardShowed = "AWARD_SHOW";
   static const firstInitKey = "FIRST_INIT";
+  static const mailsKey = "MAILS";
+  static const mailIndexKey = "MAIL_INDEX";
+  static const lastDateKey = "LAST_DATE";
 
   Future<void> setFirstInit() async {
     await _preferences.setBool(firstInitKey, false);
@@ -101,5 +104,36 @@ class PreferencesService {
 
   bool getMuted() {
     return _preferences.getBool(soundKey) ?? false;
+  }
+
+  Future<void> setMails(List<String> mails) async {
+    await _preferences.setStringList(mailsKey, mails);
+  }
+
+  List<String> getMails() {
+    return _preferences.getStringList(mailsKey) ??
+        ["Hello, welcome to Tiger's Journey: Evolution. Have a good time!"];
+  }
+
+  Future<void> setMailIndex(int index) async {
+    await _preferences.setInt(mailIndexKey, index);
+  }
+
+  int getIndex() {
+    return _preferences.getInt(mailIndexKey) ?? 1;
+  }
+
+  Future<void> setLastDate() async {
+    final temp = DateTime.now().microsecondsSinceEpoch;
+    await _preferences.setInt(lastDateKey, temp);
+  }
+
+  DateTime getLastDate() {
+    final temp = _preferences.getInt(lastDateKey) ?? 0;
+
+    if (temp == 0) return DateTime.now();
+
+    final date = DateTime.fromMicrosecondsSinceEpoch(temp);
+    return date;
   }
 }

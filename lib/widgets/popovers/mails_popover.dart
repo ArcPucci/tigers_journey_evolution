@@ -6,17 +6,34 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:provider/provider.dart';
-import 'package:tigers_journey_evolution/providers/intro_provider.dart';
+import 'package:tigers_journey_evolution/providers/providers.dart';
 import 'package:tigers_journey_evolution/utils/utils.dart';
 import 'package:tigers_journey_evolution/widgets/bg/message_box.dart';
 
-class MailsPopover extends StatelessWidget {
+class MailsPopover extends StatefulWidget {
   const MailsPopover({super.key});
 
   @override
+  State<MailsPopover> createState() => _MailsPopoverState();
+}
+
+class _MailsPopoverState extends State<MailsPopover> {
+  @override
+  void initState() {
+    super.initState();
+    final provider = Provider.of<PropertiesProvider>(
+      context,
+      listen: false,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      provider.openMails();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Consumer<IntroProvider>(
-      builder: (BuildContext context, value, Widget? child) {
+    return Consumer2<PropertiesProvider, IntroProvider>(
+      builder: (BuildContext context, value, value2, Widget? child) {
         return Stack(
           children: [
             Column(
@@ -38,52 +55,59 @@ class MailsPopover extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: List.generate(
-                        15,
+                        value.receivedMails.length,
                         (index) {
+                          final total = value.receivedMails.length - 1;
+                          final mail = value.receivedMails[total - index];
                           return Padding(
                             padding: EdgeInsets.only(bottom: 12.h),
-                            child: SizedBox(
-                              width: 361.w,
-                              height: 89.h,
-                              child: Stack(
-                                alignment: Alignment.bottomCenter,
-                                children: [
-                                  Container(
-                                    width: 361.w,
-                                    height: 84.h,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      gradient: AppTheme.bgGradient,
-                                      border: GradientBoxBorder(
+                            child: Opacity(
+                              opacity: index == 0 || index == 1 ? 1 : 0.5,
+                              child: SizedBox(
+                                width: 361.w,
+                                height: 89.h,
+                                child: Stack(
+                                  alignment: Alignment.bottomCenter,
+                                  children: [
+                                    Container(
+                                      width: 361.w,
+                                      height: 84.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
                                         gradient: AppTheme.bgGradient,
-                                        width: 0.1.sp,
+                                        border: GradientBoxBorder(
+                                          gradient: AppTheme.bgGradient,
+                                          width: 0.1.sp,
+                                        ),
+                                        boxShadow: [AppTheme.boxShadow1],
                                       ),
-                                      boxShadow: [AppTheme.boxShadow1],
+                                      padding: EdgeInsets.only(
+                                          left: 15.w, right: 37.w),
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        mail,
+                                        style: AppTextStyles.textStyle7,
+                                      ),
                                     ),
-                                    padding: EdgeInsets.only(
-                                        left: 15.w, right: 37.w),
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      'Use your stinging claws and powerful jaws to conquer any jungle challenge.',
-                                      style: AppTextStyles.textStyle7,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 0,
-                                    right: 5.w,
-                                    child: Transform.rotate(
-                                      angle: (50 / 180) * pi,
-                                      child: GestureDetector(
-                                        child: Image.asset(
-                                          'assets/png/icons/plus.png',
-                                          width: 24.r,
-                                          height: 24.r,
-                                          fit: BoxFit.contain,
+                                    Positioned(
+                                      top: 0,
+                                      right: 5.w,
+                                      child: Transform.rotate(
+                                        angle: (50 / 180) * pi,
+                                        child: GestureDetector(
+                                          onTap: () =>
+                                              value.onDelete(total - index),
+                                          child: Image.asset(
+                                            'assets/png/icons/plus.png',
+                                            width: 24.r,
+                                            height: 24.r,
+                                            fit: BoxFit.contain,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -92,21 +116,37 @@ class MailsPopover extends StatelessWidget {
                     ),
                   ),
                 ),
+                Opacity(
+                  opacity: 0,
+                  child: MessageBox(
+                    text: value2.index < 5
+                        ? value2.text
+                        : "You can see all notifications here",
+                    hasNextButton: value2.hasNextButton,
+                    hasInfoIcon: value2.hasInfoIcon,
+                    onNext: () {
+                      if (Navigator.of(context).canPop()) {
+                        Navigator.of(context).pop();
+                      }
+                      value2.onNext();
+                    },
+                  ),
+                ),
               ],
             ),
             Positioned(
               bottom: 0,
               child: MessageBox(
-                text: value.index < 5
-                    ? value.text
+                text: value2.index < 5
+                    ? value2.text
                     : "You can see all notifications here",
-                hasNextButton: value.hasNextButton,
-                hasInfoIcon: value.hasInfoIcon,
+                hasNextButton: value2.hasNextButton,
+                hasInfoIcon: value2.hasInfoIcon,
                 onNext: () {
                   if (Navigator.of(context).canPop()) {
                     Navigator.of(context).pop();
                   }
-                  value.onNext();
+                  value2.onNext();
                 },
               ),
             ),

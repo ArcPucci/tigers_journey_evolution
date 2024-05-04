@@ -72,7 +72,10 @@ class MessageBox extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 12.h),
+        Visibility(
+          visible: hasNextButton2 || hasNextButton,
+          child: SizedBox(height: 12.h),
+        ),
         Stack(
           children: [
             Container(
