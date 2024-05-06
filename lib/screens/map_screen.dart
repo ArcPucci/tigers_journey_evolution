@@ -22,11 +22,6 @@ class _MapScreenState extends State<MapScreen>
   void initState() {
     super.initState();
     final provider = Provider.of<IntroProvider>(context, listen: false);
-    if (provider.awardReached && !provider.hasAward)
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-        await onShowAwardsMessage(context);
-        provider.showAward();
-      });
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -35,6 +30,14 @@ class _MapScreenState extends State<MapScreen>
       begin: 0.0,
       end: 1.0,
     ).animate(_controller);
+    provider.init();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      if (provider.awardReached && !provider.hasAward) {
+        await onShowAwardsMessage(context);
+        provider.showAward();
+      }
+    });
   }
 
   @override

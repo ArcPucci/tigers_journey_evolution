@@ -49,7 +49,7 @@ class FactsProvider extends ChangeNotifier {
   void _onLoading() {
     _loading = 0;
     _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
-      if (currentPath != "/onboarding/map/fact_loading") {
+      if (currentPath != "/map/fact_loading") {
         _timer?.cancel();
         return;
       }
@@ -60,7 +60,7 @@ class FactsProvider extends ChangeNotifier {
         _loading = 1;
         notifyListeners();
 
-        _router.go('/onboarding/map/fact');
+        _router.go('/map/fact');
         _timer?.cancel();
         return;
       }

@@ -139,7 +139,7 @@ class _MailsPopoverState extends State<MailsPopover> {
               child: MessageBox(
                 text: value2.index < 5
                     ? value2.text
-                    : "You can see all notifications here",
+                    : "You can see all notifications here. You will receive notifications every day",
                 hasNextButton: value2.hasNextButton,
                 hasInfoIcon: value2.hasInfoIcon,
                 onNext: () {

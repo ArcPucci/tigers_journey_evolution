@@ -135,7 +135,7 @@ class GameProvider extends ChangeNotifier {
 
   void onNextLevel() {
     if (_level.id == levels.last.id) {
-      _router.go('/map');
+      _router.replace('/map');
       return;
     }
 
@@ -146,7 +146,7 @@ class GameProvider extends ChangeNotifier {
   }
 
   void onMenu() {
-    _router.go('/map');
+    _router.replace('/map');
     _onReset();
   }
 

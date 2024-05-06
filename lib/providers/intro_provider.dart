@@ -42,7 +42,9 @@ class IntroProvider extends ChangeNotifier {
 
   bool _awardShowed = false;
 
-  bool get awardReached => _preferencesService.getLevel() >= levels.last.id;
+  bool _awardReached = false;
+
+  bool get awardReached => _awardReached;
 
   bool _hasAward = false;
 
@@ -58,6 +60,10 @@ class IntroProvider extends ChangeNotifier {
   Level _level = levels[0];
 
   String get map => _level.map;
+
+  void init() {
+    _awardReached = _preferencesService.getLevel() >= levels.last.id;
+  }
 
   void onSkipAward() async {
     if (hasAward && _subIndex < 1) {
@@ -86,12 +92,12 @@ class IntroProvider extends ChangeNotifier {
   }
 
   void onPlay() {
+    _reset();
+    _hasAward = _preferencesService.getAward();
+    _awardShowed = _preferencesService.getAwardShow();
     if (_preferencesService.getFirstInit()) {
       _router.go('/onboarding');
     } else {
-      _reset();
-      _hasAward = _preferencesService.getAward();
-      _awardShowed = _preferencesService.getAwardShow();
       _router.go('/map');
     }
   }
@@ -103,9 +109,6 @@ class IntroProvider extends ChangeNotifier {
 
   void onSkip() async {
     await _preferencesService.setFirstInit();
-    _reset();
-    _hasAward = _preferencesService.getAward();
-    _awardShowed = _preferencesService.getAwardShow();
     _router.go('/map');
   }
 

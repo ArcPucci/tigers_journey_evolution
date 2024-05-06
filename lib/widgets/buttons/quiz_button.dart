@@ -47,6 +47,7 @@ class QuizButton extends StatelessWidget {
           style: AppTextStyles.title2_1.copyWith(
             shadows: [],
             color: AppTheme.dark4,
+            height: 1,
           ),
         ),
       ),

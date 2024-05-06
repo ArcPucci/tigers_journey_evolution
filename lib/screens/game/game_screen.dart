@@ -149,7 +149,8 @@ class GameScreen extends StatelessWidget {
       }
     } else if (answer.correct == Correctness.neutral ||
         (answer.correct == Correctness.wrong && provider.health > 0)) {
-      final res = await showWarningDialog(context, provider.health);
+      final res =
+          await showWarningDialog(context, answer.correct == Correctness.wrong);
       if (res) {
         provider.onRestart();
       } else {
@@ -172,9 +173,9 @@ class GameScreen extends StatelessWidget {
     );
   }
 
-  Future<bool> showWarningDialog(BuildContext context, int health) async {
-    final str = health == 0
-        ? "You have run out of lives, wait until your lives are restored or buy premium to continue the game"
+  Future<bool> showWarningDialog(BuildContext context, bool wrong) async {
+    final str = wrong
+        ? "You have lost 1 life. To pass the level you must make the right choice"
         : "To pass the level you must make the right choice";
     return await showDialog(
       context: context,

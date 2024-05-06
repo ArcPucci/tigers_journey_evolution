@@ -78,8 +78,18 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _router = GoRouter(
-      initialLocation: '/',
+      initialLocation: '/loading',
       routes: [
+        GoRoute(
+          path: '/loading',
+          pageBuilder: (context, state) {
+            return buildPageWithDefaultTransition(
+              context: context,
+              state: state,
+              child: LoadingScreen(),
+            );
+          },
+        ),
         GoRoute(
           path: '/',
           pageBuilder: (context, state) {
@@ -90,16 +100,6 @@ class _MyAppState extends State<MyApp> {
             );
           },
           routes: [
-            GoRoute(
-              path: 'loading',
-              pageBuilder: (context, state) {
-                return buildPageWithDefaultTransition(
-                  context: context,
-                  state: state,
-                  child: LoadingScreen(),
-                );
-              },
-            ),
             GoRoute(
               path: 'onboarding',
               pageBuilder: (context, state) {
