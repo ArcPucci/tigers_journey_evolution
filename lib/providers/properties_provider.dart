@@ -9,14 +9,6 @@ class PropertiesProvider extends ChangeNotifier {
     required PreferencesService preferencesService,
   }) : _preferencesService = preferencesService;
 
-  bool _soundOn = true;
-
-  bool _muted = false;
-
-  bool get soundOn => _soundOn;
-
-  bool get muted => _muted;
-
   List<String> _mails = [];
 
   List<String> get receivedMails => _mails;
@@ -38,20 +30,6 @@ class PropertiesProvider extends ChangeNotifier {
       await _preferencesService.setLastDate();
     }
 
-    _soundOn = _preferencesService.getSound();
-    _muted = _preferencesService.getMuted();
-    notifyListeners();
-  }
-
-  void onChangeSound() async {
-    _soundOn = !_soundOn;
-    await _preferencesService.updateSound(_soundOn);
-    notifyListeners();
-  }
-
-  void onMute() async {
-    _muted = !_muted;
-    await _preferencesService.updateMuted(_muted);
     notifyListeners();
   }
 
