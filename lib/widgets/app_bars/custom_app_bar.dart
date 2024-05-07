@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget {
                 onTap: () => onShowSettings(context),
               ),
               Visibility(
-                visible: value.reachedLevel >= levels.last.id,
+                visible: value.reachedLevel >= levels.last.id + 1,
                 child: Padding(
                   padding: EdgeInsets.only(left: 8.w),
                   child: CustomIconButton(

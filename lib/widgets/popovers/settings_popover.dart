@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -37,8 +38,8 @@ class SettingsPopover extends StatelessWidget {
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
-              Consumer<PropertiesProvider>(
-                builder: (BuildContext context, value, Widget? child) {
+              Consumer2<PropertiesProvider, IntroProvider>(
+                builder: (BuildContext context, value, value2, Widget? child) {
                   return Container(
                     width: 182.w,
                     height: 81.h,
@@ -52,15 +53,21 @@ class SettingsPopover extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          'assets/png/icons/question.png',
-                          width: 28.w,
-                          height: 48.h,
-                          fit: BoxFit.contain,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            value2.onTutor();
+                          },
+                          child: Image.asset(
+                            'assets/png/icons/question.png',
+                            width: 28.w,
+                            height: 48.h,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                         GestureDetector(
                           onTap: () async {
-                            if(await showQuitDialog(context)) exit(0);
+                            if (await showQuitDialog(context)) exit(0);
                           },
                           child: Image.asset(
                             'assets/png/icons/exit.png',
@@ -97,8 +104,7 @@ class SettingsPopover extends StatelessWidget {
           visible: hasMessage,
           child: const MessageBox(
             hasNextButton: false,
-            text:
-                "Click on settings to turn sound and music on or off. You can find help information or exit the application",
+            text: "Click Settings to find help or exit the app.",
           ),
         ),
       ],

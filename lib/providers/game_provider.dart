@@ -76,7 +76,6 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void onStart() {
     _router.go("/map/game");
   }
@@ -116,15 +115,18 @@ class GameProvider extends ChangeNotifier {
     _answer = currentPage.answers[index];
     notifyListeners();
 
-    if (_answer.correct == Correctness.correct && _reachedLevel <= _level.id) {
+    if (_answer.correct == Correctness.correct && _reachedLevel == _level.id) {
       _reachedLevel = _level.id + 1;
       await _preferencesService.setLevel(_level.id + 1);
+
+      await Future.delayed(const Duration(seconds: 5));
+      return;
     } else if (_answer.correct == Correctness.wrong) {
       _healthProvider.useHealth();
     }
 
     notifyListeners();
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 5));
   }
 
   void onRestart() {

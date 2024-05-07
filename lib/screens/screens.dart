@@ -7,3 +7,4 @@ export 'game/game_loading_screen.dart';
 export 'game/game_screen.dart';
 export 'fact_screen.dart';
 export 'fact_loading_screen.dart';
+export 'tutor_screen.dart';

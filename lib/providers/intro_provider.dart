@@ -23,8 +23,17 @@ class IntroProvider extends ChangeNotifier {
 
   int _subIndex = 0;
 
+  int get reachedLevel => _gameProvider.reachedLevel;
+
+  int get level => _level.id;
+
+  bool get lastLevel =>
+      reachedLevel == levels.last.id && level == levels.last.id;
+
   String get text => _loadingGame
-      ? "The adventure begins!"
+      ? lastLevel
+          ? "Your tigers have almost reached the main point of development, end this era with victory!"
+          : "The adventure begins!"
       : (!_awardShowed && hasAward)
           ? awardTexts[_subIndex]
           : introTexts[_index];
@@ -41,7 +50,7 @@ class IntroProvider extends ChangeNotifier {
 
   bool get hasAward => _hasAward;
 
-  bool get awardVisible => _hasAward && !_awardShowed;
+  bool get awardVisible => _hasAward && !_awardShowed && _awardReached;
 
   bool _awardShowed = false;
 
@@ -57,6 +66,8 @@ class IntroProvider extends ChangeNotifier {
 
   bool get loadingGame => _loadingGame;
 
+  bool get back => _index < 5 || awardVisible;
+
   String get currentPath =>
       _router.routerDelegate.currentConfiguration.fullPath;
 
@@ -64,8 +75,10 @@ class IntroProvider extends ChangeNotifier {
 
   String get map => _level.map;
 
+  bool get tutor => _index < 5 || (_subIndex < 1 && _hasAward);
+
   void init() {
-    _awardReached = _preferencesService.getLevel() >= levels.last.id;
+    _awardReached = _preferencesService.getLevel() >= levels.last.id + 1;
   }
 
   void onSkipAward() async {
@@ -76,7 +89,7 @@ class IntroProvider extends ChangeNotifier {
       return;
     }
 
-    _hasAward = !hasAward;
+    _hasAward = true;
     _awardShowed = true;
     await _preferencesService.setAwardShow();
     await _preferencesService.setAward();
@@ -84,13 +97,18 @@ class IntroProvider extends ChangeNotifier {
   }
 
   void onNext() async {
-    if (_preferencesService.getWelcome()) return;
-
     _index++;
     notifyListeners();
 
-    if (_index != 5) return;
+    if (_index == 5 && _awardReached) {
+      _subIndex = 0;
+      _awardShowed = false;
+      _hasAward = true;
+      notifyListeners();
+      return;
+    }
 
+    if (_preferencesService.getWelcome()) return;
     await _preferencesService.setWelcome();
   }
 
@@ -121,6 +139,11 @@ class IntroProvider extends ChangeNotifier {
     else
       _index = 5;
 
+    notifyListeners();
+  }
+
+  void onTutor() {
+    _index = 0;
     notifyListeners();
   }
 
