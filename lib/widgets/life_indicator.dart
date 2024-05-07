@@ -16,8 +16,14 @@ class LifeIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HealthProvider>(
-      builder: (BuildContext context, value, Widget? child) {
+    return Consumer2<HealthProvider, IntroProvider>(
+      builder: (BuildContext context, value, value2, Widget? child) {
+        final text = value2.index == 2
+            ? "29:53"
+            : value.health == 3
+                ? 'Full'
+                : value.time;
+        final health = value2.index == 2 ? "2" : value.health;
         return Stack(
           children: [
             Container(
@@ -49,7 +55,7 @@ class LifeIndicator extends StatelessWidget {
                       padding: EdgeInsets.only(left: 15.w, right: 38.w),
                       alignment: Alignment.bottomLeft,
                       child: Text(
-                        value.health == 3 ? 'Full' : value.time,
+                        text,
                         style: AppTextStyles.textStyle4,
                       ),
                     ),
@@ -74,7 +80,7 @@ class LifeIndicator extends StatelessWidget {
                     right: 0,
                     child: Center(
                       child: Text(
-                        '${value.premium ? '∞' : value.health}',
+                        '${value.premium ? '∞' : health}',
                         style: AppTextStyles.textStyle5,
                       ),
                     ),

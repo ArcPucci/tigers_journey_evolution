@@ -23,8 +23,11 @@ class IntroProvider extends ChangeNotifier {
 
   int _subIndex = 0;
 
-  String get text =>
-      (!_awardShowed && hasAward) ? awardTexts[_subIndex] : introTexts[_index];
+  String get text => _loadingGame
+      ? "The adventure begins!"
+      : (!_awardShowed && hasAward)
+          ? awardTexts[_subIndex]
+          : introTexts[_index];
 
   bool get hasNextButton => _index < introTexts.length - 2;
 

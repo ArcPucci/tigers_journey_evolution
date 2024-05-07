@@ -22,7 +22,6 @@ class GameScreen extends StatelessWidget {
           bg: value.bg,
           blurredColor: AppTheme.dark.withOpacity(0.4),
           hasCloseButton: !value.hasAppBar,
-          onClose: () => showSuccessDialog(context),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

@@ -27,6 +27,8 @@ class PropertiesProvider extends ChangeNotifier {
       index++;
       _hasNotification = true;
       _mails.add(mails[index]);
+
+      await _preferencesService.setMails(_mails);
       await _preferencesService.setLastDate();
     }
 

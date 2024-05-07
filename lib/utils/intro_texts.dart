@@ -3,7 +3,7 @@ final List<String> introTexts = [
   "You can buy endless lives in premium",
   "If you lose a life, the next one will come after a while; a timer is shown next to the life",
   "You can see all notifications here",
-  "Click on settings to turn sound and music on or off. You can find help information or exit the application",
+  "Click Settings to find help or exit the app.",
   "Click on the level to start the game",
   "The adventure begins!",
 ];

@@ -102,7 +102,8 @@ class _MapScreenState extends State<MapScreen>
                     hasSettings: value.hasSettingsButton,
                     hasMails: value.hasMailsButton,
                     hasLife: value.lifeIndicator,
-                    hasAward: value.awardVisible,
+                    hasAward: value.awardVisible ||
+                        (value.awardReached && value.loadingGame),
                     overlay: overlay,
                   ),
                 ),
@@ -114,6 +115,12 @@ class _MapScreenState extends State<MapScreen>
                   hasNextButton2: value.awardVisible,
                   hasNextButton: value.hasNextButton,
                   hasInfoIcon: value.hasInfoIcon,
+                  textStyle: value.loadingGame
+                      ? AppTextStyles.textStyle3.copyWith(
+                          shadows: [],
+                          color: AppTheme.dark4,
+                        )
+                      : null,
                   onNext2: value.onSkipAward,
                   onNext: value.onNext,
                 ),

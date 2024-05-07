@@ -56,7 +56,7 @@ class CustomAppBar2 extends StatelessWidget {
                 ),
               ),
               Visibility(
-                visible: hasAward,
+                visible: !hasSettings,
                 child: SizedBox(width: 36.r),
               ),
               Visibility(
@@ -65,8 +65,8 @@ class CustomAppBar2 extends StatelessWidget {
                   padding: EdgeInsets.only(left: 8.w),
                   child: CustomIconButton(
                     icon: 'assets/png/icons/award.png',
-                    width: 24.r,
-                    height: 26.r,
+                    width: 28.r,
+                    height: 28.r,
                     topPadding: 2.r,
                     onTap: () => onShowFacts(context),
                   ),
